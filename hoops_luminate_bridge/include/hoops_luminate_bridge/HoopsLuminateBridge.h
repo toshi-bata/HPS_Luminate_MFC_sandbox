@@ -73,6 +73,7 @@ namespace hoops_luminate_bridge {
 
         // Camera.
         RED::Object* m_camera;
+        bool m_bSyncCamera;
 
         // Scene.
         LuminateSceneInfoPtr m_conversionDataPtr;
@@ -287,6 +288,13 @@ namespace hoops_luminate_bridge {
          * @return RED_OK if success, otherwise error code.
          */
         RED_RC removeLight(LuminateLight* a_luminateLight);
+
+        /**
+        * Set sync camera.
+        * @param[in] a_sync Whether to synchronize cametra between HPS and Luminate.
+         */
+        void setSyncCamera(const bool a_sync) { m_bSyncCamera = a_sync; }
+
 
       private:
         /**
