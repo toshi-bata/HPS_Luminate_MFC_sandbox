@@ -68,6 +68,12 @@ BEGIN_MESSAGE_MAP(CHPSView, CView)
 	ON_UPDATE_COMMAND_UI(ID_OPERATORS_SELECT_POINT, &CHPSView::OnUpdateRibbonBtnPointOp)
 	ON_UPDATE_COMMAND_UI(ID_OPERATORS_SELECT_AREA, &CHPSView::OnUpdateRibbonBtnAreaOp)
 	ON_COMMAND(ID_BUTTON_START, &CHPSView::OnButtonStart)
+	ON_COMMAND(ID_CHECK_PRESERVE_COLOR, &CHPSView::OnCheckPreserveColor)
+	ON_UPDATE_COMMAND_UI(ID_CHECK_PRESERVE_COLOR, &CHPSView::OnUpdateCheckPreserveColor)
+	ON_COMMAND(ID_CHECK_OVERRIDE_MATERIAL, &CHPSView::OnCheckOverrideMaterial)
+	ON_UPDATE_COMMAND_UI(ID_CHECK_OVERRIDE_MATERIAL, &CHPSView::OnUpdateCheckOverrideMaterial)
+	ON_COMMAND(ID_CHECK_SYNC_CAMERA, &CHPSView::OnCheckSyncCamera)
+	ON_UPDATE_COMMAND_UI(ID_CHECK_SYNC_CAMERA, &CHPSView::OnUpdateCheckSyncCamera)
 END_MESSAGE_MAP()
 
 CHPSView::CHPSView()
@@ -188,6 +194,11 @@ void CHPSView::SetupSceneDefaults()
 
 	// Subscribe _warningHandler to handle warnings
 	HPS::Database::GetEventDispatcher().Subscribe(_warningHandler, HPS::Object::ClassID<HPS::WarningEvent>());
+
+	// AxisTriad
+	View view = GetCanvas().GetFrontView();
+	view.GetAxisTriadControl().SetVisibility(true).SetInteractivity(true);
+	GetCanvas().Update();
 }
 
 //! [setup_operators]
@@ -1100,13 +1111,10 @@ void CHPSView::OnUserCode4()
 
 //! [user_code]
 
-
 void CHPSView::OnButtonStart()
 {
 	RenderingDlg* pDlg = new RenderingDlg(this);
 	pDlg->ShowWindow(SW_SHOW);
-
-
 }
 
 void CHPSView::SetProgPos(int pos)
@@ -1114,3 +1122,37 @@ void CHPSView::SetProgPos(int pos)
 	GetDocument()->SetProgPos(pos);
 }
 
+void CHPSView::OnCheckPreserveColor()
+{
+	m_bPreserveColor = !m_bPreserveColor;
+}
+
+void CHPSView::OnUpdateCheckPreserveColor(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_bPreserveColor);
+}
+
+void CHPSView::OnCheckOverrideMaterial()
+{
+	m_bOverrideMaterial = !m_bOverrideMaterial;
+}
+
+void CHPSView::OnUpdateCheckOverrideMaterial(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_bOverrideMaterial);
+}
+
+void CHPSView::SetLightingModeId(const int id)
+{
+	m_iLightingModeId = id;
+}
+
+void CHPSView::OnCheckSyncCamera()
+{
+	m_bSyncCamera = !m_bSyncCamera;
+}
+
+void CHPSView::OnUpdateCheckSyncCamera(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_bSyncCamera);
+}

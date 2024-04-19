@@ -9,6 +9,7 @@
 #include <REDIREDFile.h>
 #include <REDIDataManager.h>
 #include <REDIMaterialController.h>
+#include <REDIMaterialControllerProperty.h>
 
 using namespace hoops_luminate_bridge;
 
@@ -20,7 +21,9 @@ RenderingDlg::RenderingDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_RENDERING_DIALOG, pParent),
 	m_hpsView((CHPSView*)pParent),
 	m_luminateBridge(nullptr),
-	m_timerID(0)
+	m_timerID(0),
+	m_bSyncCamera(false),
+	m_iLightingModeId(0)
 {
 	Create(IDD_RENDERING_DIALOG, pParent);
 }
@@ -57,6 +60,9 @@ BOOL RenderingDlg::OnInitDialog()
 	// Setup event handler
 	m_segmentSelectedHandler.setView(m_hpsView);
 	HPS::Database::GetEventDispatcher().Subscribe(m_segmentSelectedHandler, HPS::Object::ClassID<HPS::HighlightEvent>());
+
+	// Get parameters
+	m_iLightingModeId = m_hpsView->GetLightingModeId();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
@@ -97,6 +103,12 @@ void RenderingDlg::initLuminateBridge()
 
 	m_luminateBridge->syncScene();
 
+	switch (m_iLightingModeId)
+	{
+	case 1: m_luminateBridge->setSunSkyLightEnvironment(); break;
+	default: break;
+	}
+
 	m_luminateBridge->draw();
 
 	m_segmentSelectedHandler.setLuninateBridge(m_luminateBridge);
@@ -127,9 +139,18 @@ void RenderingDlg::applyMaterial()
 	case 0: iMatPath = "..\\Resources\\MaterialLibrary\\metal_brass.red"; break;
 	case 1: iMatPath = "..\\Resources\\MaterialLibrary\\metal_brushed_gold.red"; break;
 	case 2: iMatPath = "..\\Resources\\MaterialLibrary\\metal_chrome.red"; break;
+	case 3: iMatPath = "..\\Resources\\MaterialLibrary\\metal_copper.red"; break;
+	case 4: iMatPath = "..\\Resources\\MaterialLibrary\\metal_iron.red"; break;
+	case 5: iMatPath = "..\\Resources\\MaterialLibrary\\metal_polished_gold.red"; break;
+	case 6: iMatPath = "..\\Resources\\MaterialLibrary\\metal_silver.red"; break;
+	case 7: iMatPath = "..\\Resources\\MaterialLibrary\\metal_titanium.red"; break;
 	default: break;
 	}
 	
+	// Get potion
+	bool bOverrideMaterial = m_hpsView->GetOverrideMaterial();
+	bool bPreserveColor = m_hpsView->GetPreserveColor();
+
 	// Apply material
 	HoopsLuminateBridge* bridge = (HoopsLuminateBridge*)m_luminateBridge;
 	RED::Object* selectedTransformNode = bridge->getSelectedLuminateTransformNode();
@@ -181,7 +202,47 @@ void RenderingDlg::applyMaterial()
 			RED::Object* clonedMaterial;
 			RC_CHECK(iresourceManager->CloneMaterial(clonedMaterial, libraryMaterial, iresourceManager->GetState()));
 
-			iShape->SetMaterial(clonedMaterial, iresourceManager->GetState());
+			if (bPreserveColor)
+			{
+				// Duplicate the material controller
+				RED_RC returnCode;
+				RED::Object* materialController = iresourceManager->GetMaterialController(libraryMaterial);
+				RED::Object* clonedMaterialController = RED::Factory::CreateMaterialController(*resourceManager,
+					clonedMaterial,
+					"Realistic",
+					"",
+					"Tunable realistic material",
+					"Realistic",
+					"Redway3d",
+					returnCode);
+
+				RC_CHECK(returnCode);
+				RED::IMaterialController* clonedIMaterialController =
+					clonedMaterialController->As<RED::IMaterialController>();
+				RC_CHECK(clonedIMaterialController->CopyFrom(*materialController, clonedMaterial));
+
+				// Set HPS segment diffuse color as Luminate diffuse + reflection.
+
+				RED::Object* diffuseColorProperty = clonedIMaterialController->GetProperty(RED_MATCTRL_DIFFUSE_COLOR);
+				RED::IMaterialControllerProperty* iDiffuseColorProperty =
+					diffuseColorProperty->As<RED::IMaterialControllerProperty>();
+				iDiffuseColorProperty->SetColor(m_luminateBridge->getSelectedSegmentInfo()->m_diffuseColor,
+					iresourceManager->GetState());
+
+			}
+
+			RED::Object* currentMaterial;
+			iShape->GetMaterial(currentMaterial);
+
+			if (bOverrideMaterial)
+			{
+				iShape->SetMaterial(clonedMaterial, iresourceManager->GetState());
+			}
+			else
+			{
+				RED::IMaterial* currentIMaterial = currentMaterial->As<RED::IMaterial>();
+				RC_CHECK(currentIMaterial->CopyFrom(*clonedMaterial, iresourceManager->GetState()));
+			}
 
 			m_luminateBridge->resetFrame();
 		}
@@ -190,15 +251,38 @@ void RenderingDlg::applyMaterial()
 
 void RenderingDlg::OnTimer(UINT_PTR nIDEvent)
 {
+	// Initialize Luminate bridge if it is not there
 	if (nullptr == m_luminateBridge)
 		initLuminateBridge();
 
+	// Sync camera
+	if (m_bSyncCamera != m_hpsView->GetSyncCamera())
+	{
+		m_bSyncCamera = m_hpsView->GetSyncCamera();
+		m_luminateBridge->setSyncCamera(m_bSyncCamera);
+	}
+
+	// Apply Lighting mode
+	if (m_iLightingModeId != m_hpsView->GetLightingModeId())
+	{
+		m_iLightingModeId = m_hpsView->GetLightingModeId();
+
+		switch (m_iLightingModeId)
+		{
+		case 0: m_luminateBridge->setDefaultLightEnvironment(); break;
+		case 1: m_luminateBridge->setSunSkyLightEnvironment(); break;
+		default: break;
+		}
+	}
+
+	// Apply material
 	if (m_segmentSelectedHandler.m_bUpdated)
 	{
 		applyMaterial();
 		m_segmentSelectedHandler.m_bUpdated = false;
 	}
 
+	// Progress rendering
 	FrameStatistics stats = m_luminateBridge->getFrameStatistics();
 	int renderingProgress = stats.renderingProgress * 100.f;
 	if (renderingProgress < 100)

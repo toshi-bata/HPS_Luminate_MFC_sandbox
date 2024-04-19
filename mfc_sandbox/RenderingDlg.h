@@ -23,6 +23,9 @@ private:
 	UINT m_timerID;
 	HoopsLuminateBridgeHPS* m_luminateBridge;
 	SegmentSelectedHandler m_segmentSelectedHandler;
+	int m_bSyncCamera;
+	int m_iLightingModeId;
+
 	void initLuminateBridge();
 
 	void stopFrameTracing();

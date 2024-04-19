@@ -22,6 +22,7 @@ BEGIN_MESSAGE_MAP(CHPSFrame, CFrameWndEx)
 	ON_UPDATE_COMMAND_UI(ID_OPERATOR_MODEL_BROWSER, &CHPSFrame::OnUpdateModesModelBrowser)
 	ON_COMMAND(ID_COMBO_SEL_LEVEL, &CHPSFrame::OnComboSelectionLevel)
 	ON_COMMAND(ID_COMBO_MATERIAL, &CHPSFrame::OnComboMaterial)
+	ON_COMMAND(ID_COMBO_LIGHTING_MODE, &CHPSFrame::OnComboLightingMode)
 END_MESSAGE_MAP()
 
 CHPSFrame::CHPSFrame()
@@ -118,13 +119,27 @@ int CHPSFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CMFCRibbonProgressBar* pProgress = (CMFCRibbonProgressBar*)m_wndRibbonBar.FindByID(ID_PROGRESS_RENDER);
 	pProgress->SetRange(0, 100);
 
-	// Prepare material combo box
-	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
-	pCombo->AddItem(_T("Metal_Brass"));
-	pCombo->AddItem(_T("Metal_Brushed_Gold"));
-	pCombo->AddItem(_T("Metal_Chrome"));
-	pCombo->SelectItem(0);
+	// Prepare Material combo box
+	{
+		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
+		pCombo->AddItem(_T("Metal_Brass"));
+		pCombo->AddItem(_T("Metal_Brushed_Gold"));
+		pCombo->AddItem(_T("Metal_Chrome"));
+		pCombo->AddItem(_T("Metal_Copper"));
+		pCombo->AddItem(_T("Metal_Iron"));
+		pCombo->AddItem(_T("Metal_Polished_Gold"));
+		pCombo->AddItem(_T("Metal_Silver"));
+		pCombo->AddItem(_T("Metal_Titanium"));
+		pCombo->SelectItem(0);
+	}
 
+	// Prepare Lighting Mode combo box
+	{
+		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_LIGHTING_MODE);
+		pCombo->AddItem(_T("Default"));
+		pCombo->AddItem(_T("Sun Sky Model"));
+		pCombo->SelectItem(0);
+	}
 	return 0;
 }
 
@@ -386,4 +401,14 @@ void CHPSFrame::OnComboMaterial()
 
 	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
 	view->SetMaterialId(id);
+}
+
+
+void CHPSFrame::OnComboLightingMode()
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_LIGHTING_MODE);
+	int id = pCombo->GetCurSel();
+
+	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
+	view->SetLightingModeId(id);
 }

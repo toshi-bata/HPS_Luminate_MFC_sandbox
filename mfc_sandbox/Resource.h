@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by hps_mfc_sandbox.rc
+// Microsoft Visual C++ �Ő������ꂽ�C���N���[�h �t�@�C���B
+// hps_mfc_sandbox.rc �Ŏg�p
 //
 #define IDP_OLE_INIT_FAILED             100
 #define IDB_WRITESMALL                  110
@@ -179,17 +179,19 @@
 #define ID_ADDATTRIBUTE_PRIORITY        32832
 #define ID_ATTRIBUTECONTEXTMENU_UNSET   32833
 #define ID_BUTTON_START                 32834
-#define ID_PROGRESS1                    32835
 #define ID_PROGRESS_RENDER              32835
-#define ID_COMBO1                       32836
 #define ID_COMBO_MATERIAL               32836
+#define ID_CHECK_PRESERVE_COLOR         32837
+#define ID_CHECK_OVERRIDE_MATERIAL      32838
+#define ID_COMBO_LIGHTING_MODE          32840
+#define ID_CHECK_SYNC_CAMERA            32841
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        421
-#define _APS_NEXT_COMMAND_VALUE         32837
+#define _APS_NEXT_COMMAND_VALUE         32842
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           312
 #endif

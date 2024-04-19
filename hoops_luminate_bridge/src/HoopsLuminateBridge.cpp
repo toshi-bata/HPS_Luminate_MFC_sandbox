@@ -34,7 +34,7 @@ namespace hoops_luminate_bridge {
         RED::Matrix(RED::Vector3(1, 0, 0), RED::Vector3(0, 0, 1), RED::Vector3(0, 1, 0), RED::Vector3(0, 0, 0));
 
     HoopsLuminateBridge::HoopsLuminateBridge():
-        m_window(nullptr), m_frameIsComplete(false), m_newFrameIsRequired(true), m_axisTriad(), m_camera(),
+        m_window(nullptr), m_frameIsComplete(false), m_newFrameIsRequired(true), m_axisTriad(), m_camera(), m_bSyncCamera(false),
         m_lightingModel(LightingModel::No), m_windowWidth(0), m_windowHeight(0), m_defaultLightingModel(), m_sunSkyLightingModel(),
         m_environmentMapLightingModel(), m_frameTracingMode(RED::FTF_PATH_TRACING), m_selectedSegmentTransformIsDirty(false),
         m_rootTransformIsDirty(false)
@@ -302,7 +302,8 @@ namespace hoops_luminate_bridge {
             syncRootTransform();
         }
 
-        checkCameraSync();
+        if (m_bSyncCamera)
+            checkCameraSync();
 
         RED_RC rc = checkDrawTracing(m_window, m_frameTracingMode, m_frameIsComplete, m_newFrameIsRequired);
         // RED_RC rc = checkDrawHardware(m_window);

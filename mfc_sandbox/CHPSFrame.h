@@ -49,6 +49,7 @@ private:
 	HPS::KeyboardEvent	BuildKeyboardEvent(HPS::KeyboardEvent::Action action, UINT button);
 public:
 	afx_msg void OnComboMaterial();
+	afx_msg void OnComboLightingMode();
 };
 
 

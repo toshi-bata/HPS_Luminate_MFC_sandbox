@@ -181,12 +181,24 @@ private:
 
 	void UpdateEyeDome(bool update);
 
+	// Luminate bridge integration
+	bool m_bSyncCamera = false;
 	int m_iMaterialID = 0;
+	bool m_bOverrideMaterial = false;
+	bool m_bPreserveColor = false;
+
+	int m_iLightingModeId = 0;
 
 public:
 	void SetProgPos(const int pos);
+	bool GetSyncCamera() { return m_bSyncCamera; }
 	void SetMaterialId(const int id) { m_iMaterialID = id; }
 	int GetMateralId() { return m_iMaterialID; }
+	bool GetOverrideMaterial() { return m_bOverrideMaterial; }
+	bool GetPreserveColor() { return m_bPreserveColor; }
+
+	void SetLightingModeId(const int id);
+	int GetLightingModeId() { return m_iLightingModeId; }
 
 public:
 	//{{AFX_MSG(CHPSView)
@@ -242,6 +254,13 @@ public:
 
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnButtonStart();
+	afx_msg void OnCheckPreserveColor();
+	afx_msg void OnUpdateCheckPreserveColor(CCmdUI* pCmdUI);
+	afx_msg void OnCheckOverrideMaterial();
+	afx_msg void OnUpdateCheckOverrideMaterial(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateComboLightingMode(CCmdUI* pCmdUI);
+	afx_msg void OnCheckSyncCamera();
+	afx_msg void OnUpdateCheckSyncCamera(CCmdUI* pCmdUI);
 };
 
 

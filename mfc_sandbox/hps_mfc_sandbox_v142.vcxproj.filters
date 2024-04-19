@@ -19,6 +19,12 @@
     <Filter Include="Source Files\LuminateBridge">
       <UniqueIdentifier>{702c9ce0-ba96-4fcd-ad2e-c78856e3b160}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Dialog">
+      <UniqueIdentifier>{a34037b5-8dfc-46a0-979e-26ec7d27f364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialog">
+      <UniqueIdentifier>{3fee19b9-b787-4eb6-b425-43a983aa5ebe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\buttons.bmp">
@@ -125,9 +131,6 @@
     <ClInclude Include="UnitFloatEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderingDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RedCmds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="KeyPathUtils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderingDlg.h">
+      <Filter>Header Files\Dialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,9 +217,6 @@
     <ClCompile Include="UnitFloatEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderingDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\hoops_luminate_bridge\src\AxisTriad.cpp">
       <Filter>Source Files\LuminateBridge</Filter>
     </ClCompile>
@@ -234,6 +237,9 @@
     </ClCompile>
     <ClCompile Include="KeyPathUtils.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderingDlg.cpp">
+      <Filter>Source Files\Dialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
