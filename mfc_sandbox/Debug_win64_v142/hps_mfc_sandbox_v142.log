@@ -1,0 +1,2 @@
+﻿  stdafx.cpp
+C:\git\toshi-bata\HPS_Luminate_MFC_sandbox\mfc_sandbox\stdafx.h(46,10): fatal error C1083: include ファイルを開けません。'hps.h':No such file or directory
