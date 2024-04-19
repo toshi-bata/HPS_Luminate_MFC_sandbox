@@ -110,6 +110,7 @@
 #define IDD_PDF_EXPORT_DIALOG           414
 #define IDD_EXCHANGE_IMPORT_DIALOG      415
 #define IDR_SB_CONTEXT_MENU             416
+#define IDD_RENDERING_DIALOG            417
 #define IDC_PROGRESS_BAR                1000
 #define IDC_BUTTON_CANCEL               1001
 #define IDC_MODEL_BROWSER               1002
@@ -177,13 +178,18 @@
 #define ID_ADDATTRIBUTE_CUTTINGSECTIONATTRIBUTE 32831
 #define ID_ADDATTRIBUTE_PRIORITY        32832
 #define ID_ATTRIBUTECONTEXTMENU_UNSET   32833
+#define ID_BUTTON_START                 32834
+#define ID_PROGRESS1                    32835
+#define ID_PROGRESS_RENDER              32835
+#define ID_COMBO1                       32836
+#define ID_COMBO_MATERIAL               32836
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        417
-#define _APS_NEXT_COMMAND_VALUE         32834
+#define _APS_NEXT_RESOURCE_VALUE        421
+#define _APS_NEXT_COMMAND_VALUE         32837
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           312
 #endif

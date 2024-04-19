@@ -20,6 +20,8 @@ public:
 	// Helper method to get CHPSFrame
 	CHPSFrame *			GetCHPSFrame();
 
+	void SetProgPos(const int pos);
+
 #ifdef USING_EXCHANGE
 	void				ImportConfiguration(HPS::UTF8Array const & configuration);
 #endif

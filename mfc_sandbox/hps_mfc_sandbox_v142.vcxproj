@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\bin\win64_v142d\</OutDir>
+    <OutDir>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v142d\</OutDir>
     <IntDir>Debug_win64_v142\</IntDir>
     <TargetName>hps_mfc_sandbox</TargetName>
   </PropertyGroup>
@@ -91,7 +91,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\win64_v142\</OutDir>
+    <OutDir>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v142\</OutDir>
     <IntDir>Release_win64_v142\</IntDir>
     <TargetName>hps_mfc_sandbox</TargetName>
   </PropertyGroup>
@@ -134,11 +134,11 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN64;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Public;$(HLUMINATE_INSTALL_DIR)\Tools.m\Public;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -147,8 +147,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\lib\win64_v142d</AdditionalLibraryDirectories>
-      <AdditionalDependencies>mfc140ud.lib;hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142d;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Lib\Win64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mfc140ud.lib;hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib;REDCore.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -203,12 +203,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN64;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Public;$(HLUMINATE_INSTALL_DIR)\Tools.m\Public;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -217,8 +217,8 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib\win64_v142</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib;REDCore.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Lib\Win64</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -252,6 +252,12 @@
     <None Include="res\writesmall.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\AxisTriad.h" />
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\ConversionTools.h" />
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\HoopsHPSLuminateBridge.h" />
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\HoopsLuminateBridge.h" />
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\LightingEnvironment.h" />
+    <ClInclude Include="..\hoops_luminate_bridge\include\hoops_luminate_bridge\LuminateRCTest.h" />
     <ClInclude Include="BaseEdit.h" />
     <ClInclude Include="CHPSConfigurationPane.h" />
     <ClInclude Include="CHPSDoc.h" />
@@ -264,6 +270,11 @@
     <ClInclude Include="CProgressDialog.h" />
     <ClInclude Include="FloatEdit.h" />
     <ClInclude Include="HPSExchangeProgressDialog.h" />
+    <ClInclude Include="HPSHandlers.h" />
+    <ClInclude Include="KeyPathUtils.h" />
+    <ClInclude Include="RedCmds.h" />
+    <ClInclude Include="RedRCTest.h" />
+    <ClInclude Include="RenderingDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SandboxHighlightOp.h" />
     <ClInclude Include="stdafx.h" />
@@ -273,6 +284,11 @@
     <ClInclude Include="UnitFloatEdit.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\hoops_luminate_bridge\src\AxisTriad.cpp" />
+    <ClCompile Include="..\hoops_luminate_bridge\src\ConversionTools.cpp" />
+    <ClCompile Include="..\hoops_luminate_bridge\src\HoopsHPSLuminateBridge.cpp" />
+    <ClCompile Include="..\hoops_luminate_bridge\src\HoopsLuminateBridge.cpp" />
+    <ClCompile Include="..\hoops_luminate_bridge\src\LightingEnvironment.cpp" />
     <ClCompile Include="BaseEdit.cpp" />
     <ClCompile Include="CHPSConfigurationPane.cpp" />
     <ClCompile Include="CHPSDoc.cpp" />
@@ -285,6 +301,9 @@
     <ClCompile Include="CProgressDialog.cpp" />
     <ClCompile Include="FloatEdit.cpp" />
     <ClCompile Include="HPSExchangeProgressDialog.cpp" />
+    <ClCompile Include="HPSHandlers.cpp" />
+    <ClCompile Include="KeyPathUtils.cpp" />
+    <ClCompile Include="RenderingDlg.cpp" />
     <ClCompile Include="SandboxHighlightOp.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

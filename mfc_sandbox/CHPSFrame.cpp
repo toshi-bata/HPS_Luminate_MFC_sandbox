@@ -21,6 +21,7 @@ BEGIN_MESSAGE_MAP(CHPSFrame, CFrameWndEx)
 	ON_COMMAND(ID_OPERATOR_MODEL_BROWSER, &CHPSFrame::OnModesModelBrowser)
 	ON_UPDATE_COMMAND_UI(ID_OPERATOR_MODEL_BROWSER, &CHPSFrame::OnUpdateModesModelBrowser)
 	ON_COMMAND(ID_COMBO_SEL_LEVEL, &CHPSFrame::OnComboSelectionLevel)
+	ON_COMMAND(ID_COMBO_MATERIAL, &CHPSFrame::OnComboMaterial)
 END_MESSAGE_MAP()
 
 CHPSFrame::CHPSFrame()
@@ -112,6 +113,17 @@ int CHPSFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		combo->AddItem(_T("Subentity"));
 		combo->SelectItem((int)SandboxHighlightOperator::SelectionLevel);
 	}
+
+	// Prepare rendering progress bar
+	CMFCRibbonProgressBar* pProgress = (CMFCRibbonProgressBar*)m_wndRibbonBar.FindByID(ID_PROGRESS_RENDER);
+	pProgress->SetRange(0, 100);
+
+	// Prepare material combo box
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
+	pCombo->AddItem(_T("Metal_Brass"));
+	pCombo->AddItem(_T("Metal_Brushed_Gold"));
+	pCombo->AddItem(_T("Metal_Chrome"));
+	pCombo->SelectItem(0);
 
 	return 0;
 }
@@ -359,4 +371,19 @@ BOOL CHPSFrame::PreTranslateMessage(MSG* pMsg)
 	}
 
 	return CFrameWndEx::PreTranslateMessage(pMsg);
+}
+
+void CHPSFrame::SetProgPos(const int pos)
+{
+	CMFCRibbonProgressBar* pProgress = (CMFCRibbonProgressBar*)m_wndRibbonBar.FindByID(ID_PROGRESS_RENDER);
+	pProgress->SetPos(pos);
+}
+
+void CHPSFrame::OnComboMaterial()
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
+	int id = pCombo->GetCurSel();
+
+	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
+	view->SetMaterialId(id);
 }

@@ -16,18 +16,21 @@
 
 namespace hoops_luminate_bridge {
 
-    HoopsLuminateBridgeHPS::HoopsLuminateBridgeHPS(HPS::View* a_hpsView): m_hpsView(a_hpsView) {}
+    HoopsLuminateBridgeHPS::HoopsLuminateBridgeHPS(HPS::View* a_hpsView): m_hpsView(a_hpsView) 
+    {
+        m_viewSK = m_hpsView->GetSegmentKey();
+    }
 
     HoopsLuminateBridgeHPS::~HoopsLuminateBridgeHPS() {}
 
-    void HoopsLuminateBridgeHPS::saveCameraState() { m_hpsView->GetSegmentKey().ShowCamera(m_hpsCamera); }
+    void HoopsLuminateBridgeHPS::saveCameraState() { m_viewSK.ShowCamera(m_hpsCamera); }
 
     LuminateSceneInfoPtr HoopsLuminateBridgeHPS::convertScene() { return convertHPSSceneToLuminate(m_hpsView); }
 
     bool HoopsLuminateBridgeHPS::checkCameraChange()
     {
         HPS::CameraKit camera;
-        m_hpsView->GetSegmentKey().ShowCamera(camera);
+        m_viewSK.ShowCamera(camera);
 
         bool hasChanged = m_hpsCamera != camera;
 
@@ -37,16 +40,16 @@ namespace hoops_luminate_bridge {
         return hasChanged;
     }
 
-    CameraInfo HoopsLuminateBridgeHPS::getCameraInfo() { return getHPSCameraInfo(m_hpsView); }
+    CameraInfo HoopsLuminateBridgeHPS::getCameraInfo() { return getHPSCameraInfo(m_viewSK); }
 
-    CameraInfo getHPSCameraInfo(HPS::View* a_hpsView)
+    CameraInfo getHPSCameraInfo(HPS::SegmentKey a_SK)
     {
         //////////////////////////////////////////
         // Get the HPS camera.
         //////////////////////////////////////////
 
         HPS::CameraKit camera;
-        a_hpsView->GetSegmentKey().ShowCamera(camera);
+        a_SK.ShowCamera(camera);
 
         //////////////////////////////////////////
         // Compute camera axis in world space.

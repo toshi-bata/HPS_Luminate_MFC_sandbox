@@ -7,6 +7,7 @@
 #include "CProgressDialog.h"
 #include <WinUser.h>
 #include <vector>
+#include "RenderingDlg.h"
 
 #ifdef USING_PUBLISH
 #include "sprk_publish.h"
@@ -66,6 +67,7 @@ BEGIN_MESSAGE_MAP(CHPSView, CView)
 	ON_UPDATE_COMMAND_UI(ID_OPERATORS_FLY, &CHPSView::OnUpdateRibbonBtnFlyOp)
 	ON_UPDATE_COMMAND_UI(ID_OPERATORS_SELECT_POINT, &CHPSView::OnUpdateRibbonBtnPointOp)
 	ON_UPDATE_COMMAND_UI(ID_OPERATORS_SELECT_AREA, &CHPSView::OnUpdateRibbonBtnAreaOp)
+	ON_COMMAND(ID_BUTTON_START, &CHPSView::OnButtonStart)
 END_MESSAGE_MAP()
 
 CHPSView::CHPSView()
@@ -1083,7 +1085,7 @@ void CHPSView::OnUserCode1()
 
 void CHPSView::OnUserCode2()
 {
-    // TODO: Add your command handler code here
+	// TODO: Add your command handler code here
 }
 
 void CHPSView::OnUserCode3()
@@ -1097,3 +1099,18 @@ void CHPSView::OnUserCode4()
 }
 
 //! [user_code]
+
+
+void CHPSView::OnButtonStart()
+{
+	RenderingDlg* pDlg = new RenderingDlg(this);
+	pDlg->ShowWindow(SW_SHOW);
+
+
+}
+
+void CHPSView::SetProgPos(int pos)
+{
+	GetDocument()->SetProgPos(pos);
+}
+

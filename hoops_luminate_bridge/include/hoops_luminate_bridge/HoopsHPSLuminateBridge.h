@@ -72,6 +72,7 @@ namespace hoops_luminate_bridge {
       private:
         HPS::View* m_hpsView;
         HPS::CameraKit m_hpsCamera;
+        HPS::SegmentKey m_viewSK;
 
         // Constructors
         // ------------
@@ -115,7 +116,7 @@ namespace hoops_luminate_bridge {
      * @param[in] a_hpsView HPS view owning the camera.
      * @return Generic camera informations.
      */
-    CameraInfo getHPSCameraInfo(HPS::View* a_view);
+    CameraInfo getHPSCameraInfo(HPS::SegmentKey a_SK);
 
 } // namespace hoops_luminate_bridge
 

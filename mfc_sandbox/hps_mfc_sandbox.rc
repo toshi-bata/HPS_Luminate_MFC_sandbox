@@ -21,11 +21,111 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// English (United States) resources
+// âpåÍ (ïƒçë) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_RENDERING_DIALOG DIALOGEX 0, 0, 310, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Luminate Rendering Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Initializing...",IDC_STATIC,126,72,40,8
+END
+
+IDD_PROGRESS DIALOGEX 0, 0, 194, 47
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Loading ..."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",WS_BORDER,7,6,180,14
+    PUSHBUTTON      "Cancel",IDC_BUTTON_CANCEL,72,26,50,14
+END
+
+IDD_PDF_EXPORT_DIALOG DIALOGEX 0, 0, 129, 66
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "PDF Export"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,9,46,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,71,46,50,14
+    CONTROL         "2D PDF",IDC_RADIO_2D,"Button",BS_AUTORADIOBUTTON,43,10,39,10
+    CONTROL         "3D PDF",IDC_RADIO_3D,"Button",BS_AUTORADIOBUTTON,43,27,39,10
+END
+
+IDD_EXCHANGE_IMPORT_DIALOG DIALOGEX 0, 0, 203, 170
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Cancel Import",IDCANCEL,92,142,95,14
+    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",PBS_SMOOTH | PBS_MARQUEE,15,16,171,14
+    EDITTEXT        IDC_EDIT_MESSAGES,15,51,171,82,ES_MULTILINE | ES_READONLY | WS_VSCROLL
+    CTEXT           "Static",IDC_IMPORT_MESSAGE,7,36,189,8
+    CONTROL         "Keep Dialog Open",IDC_CHECK_KEEP_OPEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,145,73,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_RENDERING_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 303
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
+
+    IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 186
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 40
+    END
+
+    IDD_PDF_EXPORT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 122
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 59
+    END
+
+    IDD_EXCHANGE_IMPORT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 196
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 163
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_RENDERING_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -421,79 +521,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Dialog
-//
-
-IDD_PROGRESS DIALOGEX 0, 0, 194, 47
-STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Loading ..."
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
-    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",WS_BORDER,7,6,180,14
-    PUSHBUTTON      "Cancel",IDC_BUTTON_CANCEL,72,26,50,14
-END
-
-IDD_PDF_EXPORT_DIALOG DIALOGEX 0, 0, 129, 66
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
-CAPTION "PDF Export"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,9,46,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,71,46,50,14
-    CONTROL         "2D PDF",IDC_RADIO_2D,"Button",BS_AUTORADIOBUTTON,43,10,39,10
-    CONTROL         "3D PDF",IDC_RADIO_3D,"Button",BS_AUTORADIOBUTTON,43,27,39,10
-END
-
-IDD_EXCHANGE_IMPORT_DIALOG DIALOGEX 0, 0, 203, 170
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
-    PUSHBUTTON      "Cancel Import",IDCANCEL,92,142,95,14
-    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",PBS_SMOOTH | PBS_MARQUEE,15,16,171,14
-    EDITTEXT        IDC_EDIT_MESSAGES,15,51,171,82,ES_MULTILINE | ES_READONLY | WS_VSCROLL
-    CTEXT           "Static",IDC_IMPORT_MESSAGE,7,36,189,8
-    CONTROL         "Keep Dialog Open",IDC_CHECK_KEEP_OPEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,145,73,10
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO
-BEGIN
-    IDD_PROGRESS, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 186
-        TOPMARGIN, 6
-        BOTTOMMARGIN, 40
-    END
-
-    IDD_PDF_EXPORT_DIALOG, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 122
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 59
-    END
-
-    IDD_EXCHANGE_IMPORT_DIALOG, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 196
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 163
-    END
-END
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Ribbon
 //
 
@@ -631,7 +658,7 @@ BEGIN
     ID_OPERATORS_ORBIT      "Allow orbitting around origin\nOrbit"
 END
 
-#endif    // English (United States) resources
+#endif    // âpåÍ (ïƒçë) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

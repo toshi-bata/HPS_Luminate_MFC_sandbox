@@ -17,6 +17,8 @@ public:
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
+	void SetProgPos(const int pos);
+
 protected:
 	CHPSFrame();
 	DECLARE_DYNCREATE(CHPSFrame)
@@ -45,6 +47,8 @@ protected:
 
 private:
 	HPS::KeyboardEvent	BuildKeyboardEvent(HPS::KeyboardEvent::Action action, UINT button);
+public:
+	afx_msg void OnComboMaterial();
 };
 
 

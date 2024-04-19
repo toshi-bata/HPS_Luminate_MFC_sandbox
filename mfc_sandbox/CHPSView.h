@@ -181,6 +181,13 @@ private:
 
 	void UpdateEyeDome(bool update);
 
+	int m_iMaterialID = 0;
+
+public:
+	void SetProgPos(const int pos);
+	void SetMaterialId(const int id) { m_iMaterialID = id; }
+	int GetMateralId() { return m_iMaterialID; }
+
 public:
 	//{{AFX_MSG(CHPSView)
 	afx_msg void OnEditCopy();
@@ -234,6 +241,7 @@ public:
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()
+	afx_msg void OnButtonStart();
 };
 
 
