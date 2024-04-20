@@ -388,10 +388,18 @@ BOOL CHPSFrame::PreTranslateMessage(MSG* pMsg)
 	return CFrameWndEx::PreTranslateMessage(pMsg);
 }
 
-void CHPSFrame::SetProgPos(const int pos)
+void CHPSFrame::SetProgress(const int pos, const int remTime)
 {
 	CMFCRibbonProgressBar* pProgress = (CMFCRibbonProgressBar*)m_wndRibbonBar.FindByID(ID_PROGRESS_RENDER);
 	pProgress->SetPos(pos);
+	
+	int hour = remTime / 3600;
+	int min = (remTime % 3600) / 60;
+	int sec = remTime % 60;
+	wchar_t wcRemTime[256];
+	swprintf(wcRemTime, _T("%dh %dm %ds"), hour, min, sec);
+	CMFCRibbonEdit* pEdit = (CMFCRibbonEdit*)m_wndRibbonBar.FindByID(ID_EDIT_REM_TIME);
+	pEdit->SetEditText(wcRemTime);
 }
 
 void CHPSFrame::OnComboMaterial()

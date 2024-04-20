@@ -591,7 +591,7 @@ CHPSDoc * GetCHPSDoc()
 	return static_cast<CHPSDoc *>(static_cast<CFrameWnd *>(AfxGetApp()->m_pMainWnd)->GetActiveDocument());
 }
 
-void CHPSDoc::SetProgPos(const int pos) 
+void CHPSDoc::SetProgress(const int pos, const int remTime)
 { 
-	GetCHPSFrame()->SetProgPos(pos); 
+	GetCHPSFrame()->SetProgress(pos, remTime); 
 }

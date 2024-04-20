@@ -1120,9 +1120,9 @@ void CHPSView::OnButtonStart()
 	pDlg->ShowWindow(SW_SHOW);
 }
 
-void CHPSView::SetProgPos(int pos)
+void CHPSView::SetProgress(int pos, const int remTime)
 {
-	GetDocument()->SetProgPos(pos);
+	GetDocument()->SetProgress(pos, remTime);
 }
 
 void CHPSView::OnCheckPreserveColor()

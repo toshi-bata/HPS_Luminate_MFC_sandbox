@@ -190,7 +190,7 @@ private:
 	int m_iLightingModeId = 0;
 
 public:
-	void SetProgPos(const int pos);
+	void SetProgress(const int pos, const int remTime);
 	bool GetSyncCamera() { return m_bSyncCamera; }
 	void SetMaterialId(const int id) { m_iMaterialID = id; }
 	int GetMateralId() { return m_iMaterialID; }

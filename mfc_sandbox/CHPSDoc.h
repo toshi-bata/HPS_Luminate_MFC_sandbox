@@ -20,7 +20,7 @@ public:
 	// Helper method to get CHPSFrame
 	CHPSFrame *			GetCHPSFrame();
 
-	void SetProgPos(const int pos);
+	void SetProgress(const int pos, const int remTime);
 
 #ifdef USING_EXCHANGE
 	void				ImportConfiguration(HPS::UTF8Array const & configuration);

@@ -81,7 +81,7 @@ void RenderingDlg::OnCancel()
 
 	m_hpsView->GetCanvas().GetFrontView().GetOperatorControl().Pop();
 
-	m_hpsView->SetProgPos(0);
+	m_hpsView->SetProgress(0, 0);
 
 	DestroyWindow();
 }
@@ -285,17 +285,15 @@ void RenderingDlg::OnTimer(UINT_PTR nIDEvent)
 	// Progress rendering
 	FrameStatistics stats = m_luminateBridge->getFrameStatistics();
 	int renderingProgress = stats.renderingProgress * 100.f;
-	if (renderingProgress < 100)
+	if (100 >= renderingProgress)
 	{
-		m_hpsView->SetProgPos(renderingProgress);
+		m_hpsView->SetProgress(renderingProgress, stats.remainingTimeMilliseconds / 1000.0);
 		m_luminateBridge->draw();
 	}
 	else
 	{
 		KillTimer(m_timerID);
 		m_timerID = 0;
-	
-		m_luminateBridge->draw();
 	}
 
 	CDialogEx::OnTimer(nIDEvent);

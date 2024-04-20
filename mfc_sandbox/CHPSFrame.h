@@ -17,7 +17,7 @@ public:
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
-	void SetProgPos(const int pos);
+	void SetProgress(const int pos, const int remTime);
 
 protected:
 	CHPSFrame();
