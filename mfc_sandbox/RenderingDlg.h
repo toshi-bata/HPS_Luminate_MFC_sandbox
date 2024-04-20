@@ -20,6 +20,7 @@ public:
 #endif
 private:
 	CHPSView* m_hpsView;
+	char m_cHpsDir[MAX_PATH] = { '\0' };
 	UINT m_timerID;
 	HoopsLuminateBridgeHPS* m_luminateBridge;
 	SegmentSelectedHandler m_segmentSelectedHandler;

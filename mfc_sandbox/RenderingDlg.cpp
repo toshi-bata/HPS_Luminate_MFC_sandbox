@@ -48,7 +48,16 @@ END_MESSAGE_MAP()
 BOOL RenderingDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	// Get HPS install dir
+	char* path = getenv("HVISUALIZE_INSTALL_DIR");
+	
+	strcat(m_cHpsDir, path);
 
+	int lastId = strlen(m_cHpsDir) - 1;
+	if ('\\' != m_cHpsDir[lastId])
+		strcat(m_cHpsDir, "\\");
+
+	
 	// Setup timmer
 	m_timerID = 1;
 	UINT interval = 100;
@@ -132,21 +141,23 @@ void RenderingDlg::stopFrameTracing()
 void RenderingDlg::applyMaterial()
 {
 	// Get material
-	RED::String iMatPath;
+	RED::String redfilename = RED::String(m_cHpsDir);
+	redfilename.Add(RED::String("samples\\hoops_luminate_widgets\\Resources\\MaterialLibrary\\"));
+
 	int matId = m_hpsView->GetMateralId();
 	switch (matId)
 	{
-	case 0: iMatPath = "..\\Resources\\MaterialLibrary\\metal_brass.red"; break;
-	case 1: iMatPath = "..\\Resources\\MaterialLibrary\\metal_brushed_gold.red"; break;
-	case 2: iMatPath = "..\\Resources\\MaterialLibrary\\metal_chrome.red"; break;
-	case 3: iMatPath = "..\\Resources\\MaterialLibrary\\metal_copper.red"; break;
-	case 4: iMatPath = "..\\Resources\\MaterialLibrary\\metal_iron.red"; break;
-	case 5: iMatPath = "..\\Resources\\MaterialLibrary\\metal_polished_gold.red"; break;
-	case 6: iMatPath = "..\\Resources\\MaterialLibrary\\metal_silver.red"; break;
-	case 7: iMatPath = "..\\Resources\\MaterialLibrary\\metal_titanium.red"; break;
+	case 0: redfilename.Add(RED::String("metal_brass.red")); break;
+	case 1: redfilename.Add(RED::String("metal_brushed_gold.red")); break;
+	case 2: redfilename.Add(RED::String("metal_chrome.red")); break;
+	case 3: redfilename.Add(RED::String("metal_copper.red")); break;
+	case 4: redfilename.Add(RED::String("metal_iron.red")); break;
+	case 5: redfilename.Add(RED::String("metal_polished_gold.red")); break;
+	case 6: redfilename.Add(RED::String("metal_silver.red")); break;
+	case 7: redfilename.Add(RED::String("metal_titanium.red")); break;
 	default: break;
 	}
-	
+
 	// Get potion
 	bool bOverrideMaterial = m_hpsView->GetOverrideMaterial();
 	bool bPreserveColor = m_hpsView->GetPreserveColor();
@@ -177,7 +188,7 @@ void RenderingDlg::applyMaterial()
 			RED::FileInfo finfo;
 			RED::Vector< unsigned int > contexts;
 
-			RC_CHECK(ifile->Load(iMatPath, iresourceManager->GetState(), policy, fheader, finfo, contexts));
+			RC_CHECK(ifile->Load(redfilename, iresourceManager->GetState(), policy, fheader, finfo, contexts));
 
 			// release the file
 			RC_CHECK(RED::Factory::DeleteInstance(file, iresourceManager->GetState()));
