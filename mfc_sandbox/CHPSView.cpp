@@ -816,7 +816,10 @@ void CHPSView::OnFileOpen()
 		return exchange_filter;
 	};
     auto const exchange_filter = create_exchange_filter();
+	CString filter_org = filter;
+	filter = _T("");
 	filter.Append(exchange_filter);
+	filter.Append(filter_org);
 #endif
 
 #if defined(USING_PARASOLID)
