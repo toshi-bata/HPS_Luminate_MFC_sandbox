@@ -2,10 +2,7 @@
 #include "Resource.h"
 #include "CHPSDoc.h"
 #include "CHPSView.h"
-#include <hoops_luminate_bridge/HoopsHPSLuminateBridge.h>
-#include "HPSHandlers.h"
-
-using namespace hoops_luminate_bridge;
+#include "LuminateBridgeWapper.h"
 
 class RenderingDlg : public CDialogEx
 {
@@ -20,20 +17,11 @@ public:
 #endif
 private:
 	CHPSView* m_hpsView;
-	char m_cHpsDir[MAX_PATH] = { '\0' };
 	UINT m_timerID;
-	HoopsLuminateBridgeHPS* m_luminateBridge;
-	SegmentSelectedHandler m_segmentSelectedHandler;
-	int m_bSyncCamera;
-	int m_iLightingModeId;
-
-	void initLuminateBridge();
-
-	void stopFrameTracing();
-	void applyMaterial();
+	LuminateBridgeWapper* m_pLuminateBridgeWrapper;
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+	virtual void DoDataExchange(CDataExchange* pDX);
 
 	DECLARE_MESSAGE_MAP()
 

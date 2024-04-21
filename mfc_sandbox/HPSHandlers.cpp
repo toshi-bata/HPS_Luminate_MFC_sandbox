@@ -1,17 +1,19 @@
 #include "stdafx.h"
-#include "HPSHandlers.h"
+//#include <HPSWidget.h>
+//#include <hoops_luminate_bridge/HoopsHPSLuminateBridge.h>
 #include "KeyPathUtils.h"
+
+#include "HPSHandlers.h"
 
 ///////////////////////////////////////////
 ///// SegmentSelectedHandler ///////
 ///////////////////////////////////////////
 
-SegmentSelectedHandler::SegmentSelectedHandler() : HPS::EventHandler()/*, m_hpsWidget(nullptr)*/ { m_bUpdated = false; }
+SegmentSelectedHandler::SegmentSelectedHandler() : HPS::EventHandler()/*, m_hpsWidget(nullptr)*/ {}
 
 SegmentSelectedHandler ::~SegmentSelectedHandler() { Shutdown(); }
 
-void SegmentSelectedHandler::setView(CHPSView* a_view) { m_hpsView = a_view; }
-void SegmentSelectedHandler::setLuninateBridge(HoopsLuminateBridge* a_bridge) { m_luminateBridge = a_bridge; }
+void SegmentSelectedHandler::setView(CHPSView* a_view, HoopsLuminateBridge* a_bridge) { m_mHpsView = a_view; m_luminateBridge = a_bridge; }
 
 HPS::EventHandler::HandleResult SegmentSelectedHandler::Handle(HPS::Event const* in_event)
 {
@@ -34,12 +36,12 @@ HPS::EventHandler::HandleResult SegmentSelectedHandler::Handle(HPS::Event const*
 
             HPS::HighlightOptionsKit hok;
             hok.SetStyleName(HPS::UTF8("select"));
-            m_hpsView->GetCanvas().GetWindowKey().GetHighlightControl().Unhighlight(hok);
-            m_hpsView->GetCanvas().GetWindowKey().GetHighlightControl().Highlight(keyPath, hok, true);
-            m_hpsView->GetCanvas().Update();
+            m_mHpsView->GetCanvas().GetWindowKey().GetHighlightControl().Unhighlight(hok);
+            m_mHpsView->GetCanvas().GetWindowKey().GetHighlightControl().Highlight(keyPath, hok, true);
+            m_mHpsView->GetCanvas().Update();
 
             // Serialize the key path.
-            HPS::UTF8 serializedKeyPath = KeyPathUtils::serializeRawKeyPath(keyPath, m_hpsView->GetCanvas().GetFrontView().GetAttachedModel().GetSegmentKey());
+            HPS::UTF8 serializedKeyPath = KeyPathUtils::serializeRawKeyPath(keyPath, m_mHpsView->GetCanvas().GetFrontView().GetAttachedModel().GetSegmentKey());
 
             // Get current faces diffuse color.
             RED::Color diffuseColor;
@@ -52,7 +54,7 @@ HPS::EventHandler::HandleResult SegmentSelectedHandler::Handle(HPS::Event const*
                 new hoops_luminate_bridge::SelectedHPSSegmentInfo(ownerSegment.GetInstanceID(), ownerSegment, serializedKeyPath, diffuseColor));
             m_luminateBridge->setSelectedSegmentInfo(selectedInfo);
 
-            m_bUpdated = true;
+            m_mHpsView->SetSegmentSelected(true);
         }
     }
 

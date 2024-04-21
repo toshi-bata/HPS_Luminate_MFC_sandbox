@@ -164,6 +164,9 @@
     <ClInclude Include="RenderingDlg.h">
       <Filter>Header Files\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="LuminateBridgeWapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -240,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="RenderingDlg.cpp">
       <Filter>Source Files\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="LuminateBridgeWapper.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

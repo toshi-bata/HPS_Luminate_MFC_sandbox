@@ -184,6 +184,7 @@ private:
 	// Luminate bridge integration
 	bool m_bSyncCamera = false;
 	int m_iMaterialID = 0;
+	bool m_bSegmentSelected = false;
 	bool m_bOverrideMaterial = false;
 	bool m_bPreserveColor = false;
 
@@ -192,6 +193,8 @@ private:
 public:
 	void SetProgress(const int pos, const int remTime);
 	bool GetSyncCamera() { return m_bSyncCamera; }
+	void SetSegmentSelected(const bool selected) { m_bSegmentSelected = selected; }
+	bool GetSegmentSelected() { return m_bSegmentSelected; }
 	void SetMaterialId(const int id) { m_iMaterialID = id; }
 	int GetMateralId() { return m_iMaterialID; }
 	bool GetOverrideMaterial() { return m_bOverrideMaterial; }

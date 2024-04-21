@@ -15,9 +15,6 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <algorithm>
-
-using namespace std;
 
 namespace hoops_luminate_bridge {
     RED_RC createBackgroundCube(RED::Object* a_backgroundTexture, int a_size, RED::Object*& a_outBackgroundCubeImage)

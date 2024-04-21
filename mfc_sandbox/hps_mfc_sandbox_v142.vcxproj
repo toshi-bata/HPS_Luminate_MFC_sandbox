@@ -272,6 +272,7 @@
     <ClInclude Include="HPSExchangeProgressDialog.h" />
     <ClInclude Include="HPSHandlers.h" />
     <ClInclude Include="KeyPathUtils.h" />
+    <ClInclude Include="LuminateBridgeWapper.h" />
     <ClInclude Include="RedCmds.h" />
     <ClInclude Include="RedRCTest.h" />
     <ClInclude Include="RenderingDlg.h" />
@@ -303,6 +304,7 @@
     <ClCompile Include="HPSExchangeProgressDialog.cpp" />
     <ClCompile Include="HPSHandlers.cpp" />
     <ClCompile Include="KeyPathUtils.cpp" />
+    <ClCompile Include="LuminateBridgeWapper.cpp" />
     <ClCompile Include="RenderingDlg.cpp" />
     <ClCompile Include="SandboxHighlightOp.cpp" />
     <ClCompile Include="stdafx.cpp">

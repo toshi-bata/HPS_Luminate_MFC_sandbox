@@ -109,6 +109,24 @@ linux*: {
         -lGLU
 }
 
+macx: {
+    # for every lib you want to package list space-separated here
+    DYNAMIC_HOOPS_LIBS = hoops_3dgs hoops_mvo_mgk hoops_stream
+    HOOPS_LIBS = $${DYNAMIC_HOOPS_LIBS} hoops_utils_static
+
+    DEFINES += IS_OSX \
+        USE_GLX_VISUAL
+    LIBS += -Wl,-rpath,@executable_path/../Frameworks
+    LIBS += -L$${DESTDIR}
+    LIBS += -L$${HOOPS_DIR}/lib/$${LIBDIR}
+    LIBS += -L$${hoops_luminate_path}/Redsdk.m/Lib/Mac64
+    LIBS += -lREDCore
+    for(LIB, HOOPS_LIBS){
+        LIBS += -l$${LIB}
+    }
+}
+
+
 win32-msvc* {
     DEFINES += IS_WIN \
         IS_QT \
@@ -121,4 +139,14 @@ win32-msvc* {
             -lhoops_mvo_mgk \
             -lhoops_utilsstat_md \
             -lREDCore
+}
+
+macx: {
+    QMAKE_CXXFLAGS = -mmacosx-version-min=10.14 -std=c++11 -stdlib=libc++
+    CONFIG +=c++11
+    for(LIB, DYNAMIC_HOOPS_LIBS){
+        LibraryDependencies.files += $${DESTDIR}/lib$${LIB}.dylib
+    }
+    LibraryDependencies.path = Contents/Frameworks
+    QMAKE_BUNDLE_DATA += LibraryDependencies
 }

@@ -11,16 +11,15 @@ using namespace hoops_luminate_bridge;
 
 class SegmentSelectedHandler: public HPS::EventHandler {
   private:
-    CHPSView* m_hpsView;
+    CHPSView* m_mHpsView;
     HoopsLuminateBridge* m_luminateBridge;
 
   public:
     SegmentSelectedHandler();
     virtual ~SegmentSelectedHandler();
-    void setView(CHPSView* a_view);
-    void setLuninateBridge(HoopsLuminateBridge* a_bridge);
+
+    void setView(CHPSView* a_view, HoopsLuminateBridge* a_bridge);
     HandleResult Handle(HPS::Event const* in_event) override;
-    bool m_bUpdated;
 };
 
 #endif

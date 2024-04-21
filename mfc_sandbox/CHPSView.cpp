@@ -1116,6 +1116,8 @@ void CHPSView::OnUserCode4()
 
 void CHPSView::OnButtonStart()
 {
+	m_bSegmentSelected = false;
+
 	RenderingDlg* pDlg = new RenderingDlg(this);
 	pDlg->ShowWindow(SW_SHOW);
 }
