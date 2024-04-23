@@ -47,9 +47,12 @@ protected:
 
 private:
 	HPS::KeyboardEvent	BuildKeyboardEvent(HPS::KeyboardEvent::Action action, UINT button);
+	void setMaterialCombo(const int matTypeId);
+
 public:
 	afx_msg void OnComboMaterial();
 	afx_msg void OnComboLightingMode();
+	afx_msg void OnComboMatType();
 };
 
 

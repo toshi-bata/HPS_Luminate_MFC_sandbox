@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(CHPSFrame, CFrameWndEx)
 	ON_COMMAND(ID_COMBO_SEL_LEVEL, &CHPSFrame::OnComboSelectionLevel)
 	ON_COMMAND(ID_COMBO_MATERIAL, &CHPSFrame::OnComboMaterial)
 	ON_COMMAND(ID_COMBO_LIGHTING_MODE, &CHPSFrame::OnComboLightingMode)
+	ON_COMMAND(ID_COMBO_MAT_TYPE, &CHPSFrame::OnComboMatType)
 END_MESSAGE_MAP()
 
 CHPSFrame::CHPSFrame()
@@ -119,19 +120,18 @@ int CHPSFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CMFCRibbonProgressBar* pProgress = (CMFCRibbonProgressBar*)m_wndRibbonBar.FindByID(ID_PROGRESS_RENDER);
 	pProgress->SetRange(0, 100);
 
-	// Prepare Material combo box
+	// Prepare Material Type combo box
 	{
-		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
-		pCombo->AddItem(_T("Metal_Brass"));
-		pCombo->AddItem(_T("Metal_Brushed_Gold"));
-		pCombo->AddItem(_T("Metal_Chrome"));
-		pCombo->AddItem(_T("Metal_Copper"));
-		pCombo->AddItem(_T("Metal_Iron"));
-		pCombo->AddItem(_T("Metal_Polished_Gold"));
-		pCombo->AddItem(_T("Metal_Silver"));
-		pCombo->AddItem(_T("Metal_Titanium"));
+		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MAT_TYPE);
+		pCombo->AddItem(_T("Glass"));
+		pCombo->AddItem(_T("Jewellery"));
+		pCombo->AddItem(_T("Metal"));
+		pCombo->AddItem(_T("Plastic"));
 		pCombo->SelectItem(0);
 	}
+
+	// Prepare Material combo box
+	setMaterialCombo(0);
 
 	// Prepare Lighting Mode combo box
 	{
@@ -402,6 +402,18 @@ void CHPSFrame::SetProgress(const int pos, const int remTime)
 	pEdit->SetEditText(wcRemTime);
 }
 
+void CHPSFrame::OnComboMatType()
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MAT_TYPE);
+	int id = pCombo->GetCurSel();
+
+	setMaterialCombo(id);
+
+	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
+	view->SetMaterialTypeId(id);
+	view->SetMaterialId(0);
+}
+
 void CHPSFrame::OnComboMaterial()
 {
 	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
@@ -419,4 +431,49 @@ void CHPSFrame::OnComboLightingMode()
 
 	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
 	view->SetLightingModeId(id);
+}
+
+void CHPSFrame::setMaterialCombo(const int matTypeId)
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_MATERIAL);
+	pCombo->RemoveAllItems();
+
+	switch (matTypeId)
+	{
+		case 0:
+		{
+			pCombo->AddItem(_T("Clear_glass"));
+		} break;
+		case 1:
+		{
+			pCombo->AddItem(_T("Amber"));
+			pCombo->AddItem(_T("Diamond_(white)"));
+			pCombo->AddItem(_T("Emerald_(green)"));
+			pCombo->AddItem(_T("Onyx"));
+			pCombo->AddItem(_T("Pearl"));
+			pCombo->AddItem(_T("Ruby"));
+			pCombo->AddItem(_T("Sapphire_(blue)"));
+			pCombo->AddItem(_T("Topaz_(yellow)"));
+		} break;
+		case 2:
+		{
+			pCombo->AddItem(_T("Brass"));
+			pCombo->AddItem(_T("Brushed_Gold"));
+			pCombo->AddItem(_T("Chrome"));
+			pCombo->AddItem(_T("Copper"));
+			pCombo->AddItem(_T("Iron"));
+			pCombo->AddItem(_T("Polished_Gold"));
+			pCombo->AddItem(_T("Silver"));
+			pCombo->AddItem(_T("Titanium"));
+		} break;
+		case 3:
+		{
+			pCombo->AddItem(_T("Mat_plastic"));
+			pCombo->AddItem(_T("Shiny_plastic"));
+			pCombo->AddItem(_T("Transparent_plastic"));
+		} break;
+		default: break;
+	}
+
+	pCombo->SelectItem(0);
 }

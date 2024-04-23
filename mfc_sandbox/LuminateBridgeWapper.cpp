@@ -81,18 +81,58 @@ void LuminateBridgeWapper::ApplyMaterial()
 	RED::String redfilename = RED::String(m_cHpsDir);
 	redfilename.Add(RED::String("samples\\hoops_luminate_widgets\\Resources\\MaterialLibrary\\"));
 
+	int matTypeId = m_pHpsView->GetMateralTypeId();
 	int matId = m_pHpsView->GetMateralId();
-	switch (matId)
+	switch (matTypeId)
 	{
-	case 0: redfilename.Add(RED::String("metal_brass.red")); break;
-	case 1: redfilename.Add(RED::String("metal_brushed_gold.red")); break;
-	case 2: redfilename.Add(RED::String("metal_chrome.red")); break;
-	case 3: redfilename.Add(RED::String("metal_copper.red")); break;
-	case 4: redfilename.Add(RED::String("metal_iron.red")); break;
-	case 5: redfilename.Add(RED::String("metal_polished_gold.red")); break;
-	case 6: redfilename.Add(RED::String("metal_silver.red")); break;
-	case 7: redfilename.Add(RED::String("metal_titanium.red")); break;
-	default: break;
+		case 0:
+		{
+			switch (matId)
+			{
+			case 0: redfilename.Add(RED::String("glass_clear_glass.red")); break;
+			default: break;
+			} break;
+		}
+		case 1:
+		{
+			switch (matId)
+			{
+			case 0: redfilename.Add(RED::String("jewellery_amber.red")); break;
+			case 1: redfilename.Add(RED::String("jewellery_diamond_(white).red")); break;
+			case 2: redfilename.Add(RED::String("jewellery_emerald_(green).red")); break;
+			case 3: redfilename.Add(RED::String("jewellery_onyx.red")); break;
+			case 4: redfilename.Add(RED::String("jewellery_pearl.red")); break;
+			case 5: redfilename.Add(RED::String("jewellery_ruby.red")); break;
+			case 6: redfilename.Add(RED::String("jewellery_sapphire_(blue).red")); break;
+			case 7: redfilename.Add(RED::String("jewellery_topaz_(yellow).red")); break;
+			default: break;
+			} break;
+		}
+		case 2:
+		{
+			switch (matId)
+			{
+			case 0: redfilename.Add(RED::String("metal_brass.red")); break;
+			case 1: redfilename.Add(RED::String("metal_brushed_gold.red")); break;
+			case 2: redfilename.Add(RED::String("metal_chrome.red")); break;
+			case 3: redfilename.Add(RED::String("metal_copper.red")); break;
+			case 4: redfilename.Add(RED::String("metal_iron.red")); break;
+			case 5: redfilename.Add(RED::String("metal_polished_gold.red")); break;
+			case 6: redfilename.Add(RED::String("metal_silver.red")); break;
+			case 7: redfilename.Add(RED::String("metal_titanium.red")); break;
+			default: break;
+			} break;
+		}
+		case 3:
+		{
+			switch (matId)
+			{
+				case 0: redfilename.Add(RED::String("plastic_mat_plastic.red")); break;
+				case 1: redfilename.Add(RED::String("plastic_shiny_plastic.red")); break;
+				case 2: redfilename.Add(RED::String("plastic_transparent_plastic.red")); break;
+				default: break;
+			} break;
+		}
 	}
 
 	// Get potion

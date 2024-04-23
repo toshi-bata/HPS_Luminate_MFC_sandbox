@@ -21,7 +21,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// âpåÍ (ïƒçë) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -658,7 +658,7 @@ BEGIN
     ID_OPERATORS_ORBIT      "Allow orbitting around origin\nOrbit"
 END
 
-#endif    // âpåÍ (ïƒçë) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
