@@ -1116,8 +1116,20 @@ void CHPSView::OnUserCode4()
 
 void CHPSView::OnButtonStart()
 {
+	// Set Perspective projection
+	HPS::SegmentKey viewSK = GetCanvas().GetFrontView().GetSegmentKey();
+	HPS::CameraKit camera;
+	viewSK.ShowCamera(camera);
+
+	camera.SetProjection(HPS::Camera::Projection::Perspective);
+	viewSK.SetCamera(camera);
+
+	GetCanvas().Update();
+
+	// Set default
 	m_bSegmentSelected = false;
 
+	// Show dialog
 	RenderingDlg* pDlg = new RenderingDlg(this);
 	pDlg->ShowWindow(SW_SHOW);
 }
