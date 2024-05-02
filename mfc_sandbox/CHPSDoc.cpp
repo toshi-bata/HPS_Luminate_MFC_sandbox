@@ -595,3 +595,8 @@ void CHPSDoc::SetProgress(const int pos, const int remTime)
 { 
 	GetCHPSFrame()->SetProgress(pos, remTime); 
 }
+
+void CHPSDoc::SetLighingModeSelItem(const int id) {
+	CHPSFrame* frame = GetCHPSFrame();
+	frame->SetLighingModeSelItem(id);
+}

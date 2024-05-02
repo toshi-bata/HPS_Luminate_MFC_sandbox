@@ -24,6 +24,7 @@ LuminateBridgeWapper::LuminateBridgeWapper(CHPSView* view) :
 	if ('\\' != m_cHpsDir[lastId])
 		strcat(m_cHpsDir, "\\");
 
+	strcpy(m_cHdriFilePath, "");
 }
 
 LuminateBridgeWapper::~LuminateBridgeWapper()
@@ -246,6 +247,15 @@ void LuminateBridgeWapper::Update()
 		m_luminateBridge->setSyncCamera(m_bSyncCamera);
 	}
 
+	// Set environment map
+	if (0 != strcmp(m_cHdriFilePath, m_pHpsView->GetHdriFilePath()))
+	{
+		strcpy(m_cHdriFilePath, m_pHpsView->GetHdriFilePath());
+
+		m_luminateBridge->resetFrame();
+		m_luminateBridge->setEnvMapLightEnvironment(m_cHdriFilePath, true, RED::Color::WHITE);
+	}
+
 	// Apply Lighting mode
 	if (m_iLightingModeId != m_pHpsView->GetLightingModeId())
 	{
@@ -255,6 +265,15 @@ void LuminateBridgeWapper::Update()
 		{
 		case 0: m_luminateBridge->setDefaultLightEnvironment(); break;
 		case 1: m_luminateBridge->setSunSkyLightEnvironment(); break;
+		case 2: 
+		{
+			if (0 != strcmp(m_cHdriFilePath, ""))
+			{
+				m_luminateBridge->resetFrame();
+				m_luminateBridge->setEnvMapLightEnvironment("", true, RED::Color::WHITE);
+			}
+		}
+		break;
 		default: break;
 		}
 	}
@@ -265,5 +284,4 @@ void LuminateBridgeWapper::Update()
 		ApplyMaterial();
 		m_pHpsView->SetSegmentSelected(false);
 	}
-
 }

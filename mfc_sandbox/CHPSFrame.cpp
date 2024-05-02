@@ -138,6 +138,7 @@ int CHPSFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_LIGHTING_MODE);
 		pCombo->AddItem(_T("Default"));
 		pCombo->AddItem(_T("Sun Sky Model"));
+		pCombo->AddItem(_T("Environment Map"));
 		pCombo->SelectItem(0);
 	}
 	return 0;
@@ -476,4 +477,10 @@ void CHPSFrame::setMaterialCombo(const int matTypeId)
 	}
 
 	pCombo->SelectItem(0);
+}
+
+void CHPSFrame::SetLighingModeSelItem(const int id)
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_LIGHTING_MODE);
+	pCombo->SelectItem(id);
 }

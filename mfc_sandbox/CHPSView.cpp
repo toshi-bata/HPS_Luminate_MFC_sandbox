@@ -74,6 +74,7 @@ BEGIN_MESSAGE_MAP(CHPSView, CView)
 	ON_UPDATE_COMMAND_UI(ID_CHECK_OVERRIDE_MATERIAL, &CHPSView::OnUpdateCheckOverrideMaterial)
 	ON_COMMAND(ID_CHECK_SYNC_CAMERA, &CHPSView::OnCheckSyncCamera)
 	ON_UPDATE_COMMAND_UI(ID_CHECK_SYNC_CAMERA, &CHPSView::OnUpdateCheckSyncCamera)
+	ON_COMMAND(ID_BUTTON_LOAD_ENV_MAP, &CHPSView::OnButtonLoadEnvMap)
 END_MESSAGE_MAP()
 
 CHPSView::CHPSView()
@@ -90,6 +91,8 @@ CHPSView::CHPSView()
 	_operatorStates[SandboxOperators::AreaOperator] = false;
 
 	_capsLockState = IsCapsLockOn();
+
+	strcpy(m_cHdriFilePath, "");
 }
 
 CHPSView::~CHPSView()
@@ -1172,4 +1175,20 @@ void CHPSView::OnCheckSyncCamera()
 void CHPSView::OnUpdateCheckSyncCamera(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetCheck(m_bSyncCamera);
+}
+
+
+void CHPSView::OnButtonLoadEnvMap()
+{
+	CString filter = _T("HDRI Files (*.hdr)|*.hdr||");
+	CFileDialog dlg(TRUE, _T(".*"), NULL, OFN_HIDEREADONLY, filter, NULL);
+	if (dlg.DoModal() != IDOK)
+		return;
+
+	CString filePath = dlg.GetPathName();
+	strcpy(m_cHdriFilePath, CStringA(filePath).GetBuffer());
+
+	m_iLightingModeId = 2;
+	
+	GetDocument()->SetLighingModeSelItem(m_iLightingModeId);
 }

@@ -188,6 +188,7 @@ private:
 	bool m_bSegmentSelected = false;
 	bool m_bOverrideMaterial = false;
 	bool m_bPreserveColor = false;
+	char m_cHdriFilePath[MAX_PATH];
 
 	int m_iLightingModeId = 0;
 
@@ -205,6 +206,7 @@ public:
 
 	void SetLightingModeId(const int id);
 	int GetLightingModeId() { return m_iLightingModeId; }
+	char* GetHdriFilePath() { return m_cHdriFilePath; }
 
 public:
 	//{{AFX_MSG(CHPSView)
@@ -267,6 +269,7 @@ public:
 	afx_msg void OnUpdateComboLightingMode(CCmdUI* pCmdUI);
 	afx_msg void OnCheckSyncCamera();
 	afx_msg void OnUpdateCheckSyncCamera(CCmdUI* pCmdUI);
+	afx_msg void OnButtonLoadEnvMap();
 };
 
 

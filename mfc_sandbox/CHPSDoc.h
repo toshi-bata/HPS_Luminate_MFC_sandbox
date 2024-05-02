@@ -52,6 +52,9 @@ private:
 	HPS::CADModel		_cadModel;
 	HPS::CameraKit		_defaultCamera;
 
+public:
+	void SetLighingModeSelItem(const int id);
+
 protected:
 	CHPSDoc();
 	DECLARE_DYNCREATE(CHPSDoc);

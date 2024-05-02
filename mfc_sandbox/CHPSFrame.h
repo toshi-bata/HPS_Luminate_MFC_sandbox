@@ -50,6 +50,9 @@ private:
 	void setMaterialCombo(const int matTypeId);
 
 public:
+	void SetLighingModeSelItem(const int id);
+
+public:
 	afx_msg void OnComboMaterial();
 	afx_msg void OnComboLightingMode();
 	afx_msg void OnComboMatType();
