@@ -73,6 +73,7 @@ namespace hoops_luminate_bridge {
         HPS::View* m_hpsView;
         HPS::CameraKit m_hpsCamera;
         HPS::SegmentKey m_viewSK;
+        HPS::SegmentKey m_modelSK;
 
         // Constructors
         // ------------

@@ -56,6 +56,7 @@ public:
 	afx_msg void OnComboMaterial();
 	afx_msg void OnComboLightingMode();
 	afx_msg void OnComboMatType();
+	afx_msg void OnComboUpVect();
 };
 
 

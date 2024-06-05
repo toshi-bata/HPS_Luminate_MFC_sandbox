@@ -24,6 +24,7 @@ BEGIN_MESSAGE_MAP(CHPSFrame, CFrameWndEx)
 	ON_COMMAND(ID_COMBO_MATERIAL, &CHPSFrame::OnComboMaterial)
 	ON_COMMAND(ID_COMBO_LIGHTING_MODE, &CHPSFrame::OnComboLightingMode)
 	ON_COMMAND(ID_COMBO_MAT_TYPE, &CHPSFrame::OnComboMatType)
+	ON_COMMAND(ID_COMBO_UP_VECT, &CHPSFrame::OnComboUpVect)
 END_MESSAGE_MAP()
 
 CHPSFrame::CHPSFrame()
@@ -140,6 +141,18 @@ int CHPSFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		pCombo->AddItem(_T("Sun Sky Model"));
 		pCombo->AddItem(_T("Environment Map"));
 		pCombo->SelectItem(0);
+	}
+
+	// Prepare Up Vector combo box
+	{
+		CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_UP_VECT);
+		pCombo->AddItem(_T("X"));
+		pCombo->AddItem(_T("Y"));
+		pCombo->AddItem(_T("Z"));
+		pCombo->AddItem(_T("-X"));
+		pCombo->AddItem(_T("-Y"));
+		pCombo->AddItem(_T("-Z"));
+		pCombo->SelectItem(1);
 	}
 	return 0;
 }
@@ -483,4 +496,13 @@ void CHPSFrame::SetLighingModeSelItem(const int id)
 {
 	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_LIGHTING_MODE);
 	pCombo->SelectItem(id);
+}
+
+void CHPSFrame::OnComboUpVect()
+{
+	CMFCRibbonComboBox* pCombo = (CMFCRibbonComboBox*)m_wndRibbonBar.FindByID(ID_COMBO_UP_VECT);
+	int id = pCombo->GetCurSel();
+
+	CHPSView* view = reinterpret_cast<CHPSView*>(GetActiveView());
+	view->SetUpVector(id);
 }

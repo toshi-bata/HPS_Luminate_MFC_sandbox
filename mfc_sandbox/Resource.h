@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Cï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½B
-// hps_mfc_sandbox.rc ï¿½Ågï¿½p
+// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹B
+// hps_mfc_sandbox.rc ‚Åg—p
 //
 #define IDP_OLE_INIT_FAILED             100
 #define IDB_WRITESMALL                  110
@@ -188,13 +188,15 @@
 #define ID_EDIT_REM_TIME                32843
 #define ID_COMBO_MAT_TYPE               32844
 #define ID_BUTTON_LOAD_ENV_MAP          32845
+#define ID_COMBO_UP_VECT                32846
+#define ID_BUTTON_SAVE_IMG              32847
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        421
-#define _APS_NEXT_COMMAND_VALUE         32846
+#define _APS_NEXT_COMMAND_VALUE         32848
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           312
 #endif

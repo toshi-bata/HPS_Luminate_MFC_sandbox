@@ -841,6 +841,11 @@ void CHPSView::OnFileOpen()
 
 	if (dlg.DoModal() == IDOK)
 		GetDocument()->OnOpenDocument(dlg.GetPathName());
+
+	// AxisTriad and NaviCube
+	View view = GetCanvas().GetFrontView();
+	view.GetAxisTriadControl().SetVisibility(true).SetInteractivity(true);
+	GetCanvas().Update();
 }
 
 void CHPSView::OnFileSaveAs()
@@ -1192,3 +1197,45 @@ void CHPSView::OnButtonLoadEnvMap()
 	
 	GetDocument()->SetLighingModeSelItem(m_iLightingModeId);
 }
+
+void CHPSView::SetUpVector(const int id)
+{
+	m_rootUpVector = id;
+
+	HPS::SegmentKey key = GetCanvas().GetFrontView().GetAttachedModel().GetSegmentKey();
+
+	// reset modelling matrix
+	HPS::MatrixKit modellingMatrix = HPS::MatrixKit();
+	key.SetModellingMatrix(modellingMatrix);
+
+	switch (m_rootUpVector) {
+	case 0: // X up
+		modellingMatrix.Rotate(90.0f, 0.0f, 0.0f);
+		break;
+	case 1: // Y up = default
+		break;
+	case 2: // Z up
+		modellingMatrix.Rotate(0.0f, 90.0f, 0.0f);
+		break;
+	case 3: // -X up
+		modellingMatrix.Rotate(-90.0f, 0.0f, 0.0f);
+		break;
+	case 4: // -Y up
+		modellingMatrix.Rotate(180.0f, 0.0f, 0.0f);
+		break;
+	case 5: // -Z up
+		modellingMatrix.Rotate(0.0f, -90.0f, 0.0f);
+		break;
+	}
+
+	// set up rotation and rotation based on up vector
+	modellingMatrix.Scale(m_rootScale, m_rootScale, m_rootScale);
+
+	// set root matrix
+	key.SetModellingMatrix(modellingMatrix);
+
+	// fit camera to scale
+	GetCanvas().Update();
+}
+
+

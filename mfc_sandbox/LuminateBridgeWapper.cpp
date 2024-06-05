@@ -245,6 +245,8 @@ void LuminateBridgeWapper::Update()
 	{
 		m_bSyncCamera = m_pHpsView->GetSyncCamera();
 		m_luminateBridge->setSyncCamera(m_bSyncCamera);
+
+		m_luminateBridge->invalidateRootTransform();
 	}
 
 	// Set environment map

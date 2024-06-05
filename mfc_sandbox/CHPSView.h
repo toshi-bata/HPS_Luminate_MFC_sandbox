@@ -191,6 +191,8 @@ private:
 	char m_cHdriFilePath[MAX_PATH];
 
 	int m_iLightingModeId = 0;
+	int m_rootUpVector = 1;
+	double m_rootScale = 1.0;
 
 public:
 	void SetProgress(const int pos, const int remTime);
@@ -207,6 +209,7 @@ public:
 	void SetLightingModeId(const int id);
 	int GetLightingModeId() { return m_iLightingModeId; }
 	char* GetHdriFilePath() { return m_cHdriFilePath; }
+	void SetUpVector(const int id);
 
 public:
 	//{{AFX_MSG(CHPSView)

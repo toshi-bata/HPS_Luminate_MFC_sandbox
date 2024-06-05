@@ -19,6 +19,7 @@ namespace hoops_luminate_bridge {
     HoopsLuminateBridgeHPS::HoopsLuminateBridgeHPS(HPS::View* a_hpsView): m_hpsView(a_hpsView) 
     {
         m_viewSK = m_hpsView->GetSegmentKey();
+        m_modelSK = m_hpsView->GetAttachedModel().GetSegmentKey();
     }
 
     HoopsLuminateBridgeHPS::~HoopsLuminateBridgeHPS() {}
@@ -524,7 +525,7 @@ namespace hoops_luminate_bridge {
 
     RED_RC HoopsLuminateBridgeHPS::syncRootTransform()
     {
-        HPS::SegmentKey modelSegmentKey = m_hpsView->GetAttachedModel().GetSegmentKey();
+        HPS::SegmentKey modelSegmentKey = m_modelSK;
         HPS::MatrixKit modellingMatrix;
         if (modelSegmentKey.ShowModellingMatrix(modellingMatrix)) {
             // get current matrix
