@@ -43,23 +43,6 @@ namespace hoops_luminate_bridge {
 
     HoopsLuminateBridge::~HoopsLuminateBridge()
     {
-        RED::Object* resourceManager = RED::Factory::CreateInstance(CID_REDResourceManager);
-        RED::IResourceManager* iresourceManager = resourceManager->As<RED::IResourceManager>();
-
-        // clean default model
-        iresourceManager->DeleteImage(m_defaultLightingModel.backgroundCubeImage, iresourceManager->GetState());
-        RED::Factory::DeleteInstance(m_defaultLightingModel.skyLight, iresourceManager->GetState());
-
-        // clean sun sky model
-        iresourceManager->DeleteImage(m_sunSkyLightingModel.backgroundCubeImage, iresourceManager->GetState());
-        RED::Factory::DeleteInstance(m_sunSkyLightingModel.skyLight, iresourceManager->GetState());
-        RED::Factory::DeleteInstance(m_sunSkyLightingModel.sunLight, iresourceManager->GetState());
-
-        // clean env map
-        if (m_environmentMapLightingModel.imagePath != "") {
-            iresourceManager->DeleteImage(m_environmentMapLightingModel.backgroundCubeImage, iresourceManager->GetState());
-            RED::Factory::DeleteInstance(m_environmentMapLightingModel.skyLight, iresourceManager->GetState());
-        }
     }
 
     bool HoopsLuminateBridge::initialize(std::string const& a_license,
@@ -261,6 +244,24 @@ namespace hoops_luminate_bridge {
         // This will destroy absolutely all, including
         // shared resources.
         //////////////////////////////////////////
+
+        RED::Object* resourceManager = RED::Factory::CreateInstance(CID_REDResourceManager);
+        RED::IResourceManager* iresourceManager = resourceManager->As<RED::IResourceManager>();
+
+        // clean default model
+        iresourceManager->DeleteImage(m_defaultLightingModel.backgroundCubeImage, iresourceManager->GetState());
+        RED::Factory::DeleteInstance(m_defaultLightingModel.skyLight, iresourceManager->GetState());
+
+        // clean sun sky model
+        iresourceManager->DeleteImage(m_sunSkyLightingModel.backgroundCubeImage, iresourceManager->GetState());
+        RED::Factory::DeleteInstance(m_sunSkyLightingModel.skyLight, iresourceManager->GetState());
+        RED::Factory::DeleteInstance(m_sunSkyLightingModel.sunLight, iresourceManager->GetState());
+
+        // clean env map
+        if (m_environmentMapLightingModel.imagePath != "") {
+            iresourceManager->DeleteImage(m_environmentMapLightingModel.backgroundCubeImage, iresourceManager->GetState());
+            RED::Factory::DeleteInstance(m_environmentMapLightingModel.skyLight, iresourceManager->GetState());
+        }
 
         return shutdownLuminate(m_window) == RED_OK;
     }

@@ -32,6 +32,7 @@ LuminateBridgeWapper::~LuminateBridgeWapper()
 	HPS::Database::GetEventDispatcher().UnSubscribe(HPS::Object::ClassID<HPS::HighlightEvent>());
 
 	m_luminateBridge->shutdown();
+	delete m_luminateBridge;
 }
 
 bool LuminateBridgeWapper::Initialize(void* a_osHandle, int a_windowWidth, int a_windowHeight)
