@@ -81,7 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v142d\</OutDir>
     <IntDir>Debug_win64_v142\</IntDir>
-    <TargetName>hps_mfc_sandbox</TargetName>
+    <TargetName>hps_Luminate_mfc_sandbox</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -93,7 +93,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v142\</OutDir>
     <IntDir>Release_win64_v142\</IntDir>
-    <TargetName>hps_mfc_sandbox</TargetName>
+    <TargetName>hps_Luminate_mfc_sandbox</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,7 +138,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN64;_WINDOWS;_DEBUG;USING_EXCHANGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Public;$(HLUMINATE_INSTALL_DIR)\Tools.m\Public;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\include;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -147,7 +147,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142d;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Lib\Win64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142d;$(HLUMINATE_INSTALL_DIR)\bin\win64</AdditionalLibraryDirectories>
       <AdditionalDependencies>mfc140ud.lib;hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib;REDCore.lib;hps_sprk_exchange.lib</AdditionalDependencies>
     </Link>
     <Midl>
@@ -208,7 +208,7 @@
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN64;_WINDOWS;NDEBUG;USING_EXCHANGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Public;$(HLUMINATE_INSTALL_DIR)\Tools.m\Public;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(HVISUALIZE_INSTALL_DIR)\include;$(HLUMINATE_INSTALL_DIR)\include;..\hoops_luminate_bridge\include</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
@@ -218,7 +218,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;imm32.lib;REDCore.lib;hps_sprk_exchange.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142;$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Lib\Win64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v142;$(HLUMINATE_INSTALL_DIR)\bin\win64</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
