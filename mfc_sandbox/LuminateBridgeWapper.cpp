@@ -15,15 +15,6 @@ using namespace hoops_luminate_bridge;
 LuminateBridgeWapper::LuminateBridgeWapper(CHPSView* view) :
 	m_pHpsView(view), m_iLightingModeId(0), m_bSyncCamera(false)
 {
-	// Get HPS install dir
-	char* path = getenv("HVISUALIZE_INSTALL_DIR");
-
-	strcat(m_cHpsDir, path);
-
-	int lastId = strlen(m_cHpsDir) - 1;
-	if ('\\' != m_cHpsDir[lastId])
-		strcat(m_cHpsDir, "\\");
-
 	strcpy(m_cHdriFilePath, "");
 }
 
@@ -80,8 +71,7 @@ void LuminateBridgeWapper::stopFrameTracing()
 void LuminateBridgeWapper::ApplyMaterial()
 {
 	// Get material
-	RED::String redfilename = RED::String(m_cHpsDir);
-	redfilename.Add(RED::String("samples\\hoops_luminate_widgets\\Resources\\MaterialLibrary\\"));
+	RED::String redfilename = RED::String("..\\..\\samples\\hoops_luminate_widgets\\Resources\\MaterialLibrary\\");
 
 	int matTypeId = m_pHpsView->GetMateralTypeId();
 	int matId = m_pHpsView->GetMateralId();

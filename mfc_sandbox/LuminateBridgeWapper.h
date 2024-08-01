@@ -16,7 +16,6 @@ public:
 
 private:
 	CHPSView* m_pHpsView;
-	char m_cHpsDir[MAX_PATH] = { '\0' };
 	int m_iLightingModeId;
 	char m_cHdriFilePath[MAX_PATH];
 	bool m_bSyncCamera;

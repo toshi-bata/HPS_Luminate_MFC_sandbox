@@ -86,7 +86,8 @@ void RenderingDlg::OnTimer(UINT_PTR nIDEvent)
 	if (100 >= renderingProgress)
 	{
 		m_hpsView->SetProgress(renderingProgress, stats.remainingTimeMilliseconds / 1000.0);
-		m_pLuminateBridgeWrapper->Draw();
+		for (int i = 0; i < 10; i++)
+			m_pLuminateBridgeWrapper->Draw();
 	}
 	else
 	{
