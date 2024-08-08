@@ -4,7 +4,13 @@
     <RESOURCE_FILE>hps_mfc_sandbox.rc</RESOURCE_FILE>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerEnvironment>PATH=$(HLUMINATE_INSTALL_DIR)\Redsdk.m\Bin\Win64</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH=$(HLUMINATE_INSTALL_DIR)\bin\win64</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerEnvironment>PATH=$(HLUMINATE_INSTALL_DIR)\bin\win64</LocalDebuggerEnvironment>
   </PropertyGroup>
 </Project>
